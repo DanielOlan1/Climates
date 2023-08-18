@@ -6,9 +6,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class WeatherService {
-    private apiUrl: string = environment.apiUrl;
-    private key: string = environment.key;
-    private host: string = environment.host;
+  private apiUrl: string = environment.apiUrl;
+  private key: string = environment.key;
+  private host: string = environment.host;
 
   constructor(private http: HttpClient) {}
 

@@ -12,9 +12,47 @@ export class HomePage {
 
   forecastData: any; // Almacena los datos del pronóstico
 
-  cities: string[] = ['Monterrey', 'Guadalajara', 'Ciudad de México']; // Agrega las ciudades que desees
-
-  constructor(private weatherService: WeatherService) {}
+  cities: string[] = [
+    'Monterrey',
+    'Guadalupe',
+    'San Nicolas de los Garza',
+    'Apodaca',
+    'General Escobedo',
+    'Santa Catarina',
+    'San Pedro Garza García',
+    'Juarez',
+    'Cadereyta Jimenez',
+    'Garcia',
+    'Santiago',
+    'San Juan Nepomuceno',
+    'Salinas Victoria',
+    'Allende',
+    'General Zuazua',
+    'Hidalgo',
+    'Pesqueria',
+    'Doctor Arroyo',
+    'Montemorelos',
+    'Linares',
+    'General Teran',
+    'Sabinas Hidalgo',
+    'China',
+    'Cerralvo',
+    'Mina',
+    'General Bravo',
+    'Abasolo',
+    'Cienega de Flores',
+    'Hualahuises',
+    'Villaldama'
+  ];
+  
+  constructor(private weatherService: WeatherService) {
+    // Obtener la última ciudad buscada del almacenamiento local
+    const lastCity = localStorage.getItem('lastCity');
+    if (lastCity) {
+      this.selectedCity = lastCity;
+      this.getForecast(); // Obtener el pronóstico para la última ciudad buscada
+    }
+  }
 
   getForecast() {
     if (this.selectedCity) {
@@ -22,6 +60,9 @@ export class HomePage {
         .subscribe(
           (forecast: any) => {
             this.forecastData = forecast;
+
+            // Guardar la última ciudad buscada en el almacenamiento local
+            localStorage.setItem('lastCity', this.selectedCity);
           },
           (error: any) => {
             console.error('Error en la solicitud:', error);
