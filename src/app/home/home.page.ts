@@ -56,7 +56,7 @@ export class HomePage implements OnInit{
   }
   ngOnInit(): void {
   this.getForecast();
-  this
+  this.shouldShowClouds();
   }
   
   shouldShowClouds(): boolean {
