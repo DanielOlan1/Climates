@@ -20,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [{ 
     provide: RouteReuseStrategy, 
-    useClass: IonicRouteStrategy }],
+    useClass: IonicRouteStrategy,
+    },],
   bootstrap: [
     AppComponent
   ],

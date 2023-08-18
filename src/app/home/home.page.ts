@@ -8,7 +8,7 @@ import { WeatherService } from '../service/weather.service';
 })
 export class HomePage {
   selectedCity: string = ''; // Almacena el nombre de la ciudad seleccionada
-  days: number = 3; // Número de días para el pronóstico
+  days: number = 7; // Número de días para el pronóstico
 
   forecastData: any; // Almacena los datos del pronóstico
 
