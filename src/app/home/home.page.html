@@ -1,20 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Obtener Pronóstico del Clima
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>Select City:</ion-label>
+    <ion-select [(ngModel)]="selectedCity">
+      <ion-select-option *ngFor="let city of cities" [value]="city">{{ city }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="full" (click)="getForecast()">Get Forecast</ion-button>
+
+  <div *ngIf="forecastData">
+    <h2>Location:</h2>
+    <p>Name: {{ forecastData.location.name }}</p>
+    <p>Region: {{ forecastData.location.region }}</p>
+    <p>Country: {{ forecastData.location.country }}</p>
+    <p>Local Time: {{ forecastData.location.localtime }}</p>
+
+    <h2>Current Weather:</h2>
+    <p>Last Update: {{ forecastData.current.last_update }}</p>
+    <p>Temperature Celsius: {{ forecastData.current.temp_c }}</p>
+    <p>Temperature Fahrenheit: {{ forecastData.current.temp_f }}</p>
+    <p>Humidity: {{ forecastData.current.humidity }}</p>
+    <p>Cloud: {{ forecastData.current.cloud }}</p>
+
+    <h2>Forecast:</h2>
+    <ion-list>
+      <ion-item *ngFor="let day of forecastData.forecast.forecastday">
+        <h3>Date: {{ day.date }}</h3>
+        <p>Max Temp Celsius: {{ day.day.maxtemp_c }}</p>
+        <p>Max Temp Fahrenheit: {{ day.day.maxtemp_f }}</p>
+        <p>Min Temp Celsius: {{ day.day.mintemp_c }}</p>
+        <p>Min Temp Fahrenheit: {{ day.day.mintemp_f }}</p>
+        <p>Total Precipitation mm: {{ day.day.totalprecip_mm }}</p>
+        <p>Total Precipitation in: {{ day.day.totalprecip_in }}</p>
+        <p>Total Snow cm: {{ day.day.totalsnow_cm }}</p>
+        <p>Condition: {{ day.day.condition.text }}</p>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>
