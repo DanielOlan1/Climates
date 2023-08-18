@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { WeatherService } from '../service/weather.service';
 
 @Component({
@@ -6,11 +6,11 @@ import { WeatherService } from '../service/weather.service';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss']
 })
-export class HomePage {
+export class HomePage implements OnInit{
   selectedCity: string = ''; // Almacena el nombre de la ciudad seleccionada
   days: number = 7; // Número de días para el pronóstico
 
-  forecastData: any; // Almacena los datos del pronóstico
+ forecastData: any; // Almacena los datos del pronóstico
 
   cities: string[] = [
     'Monterrey',
@@ -54,14 +54,23 @@ export class HomePage {
       this.getForecast(); // Obtener el pronóstico para la última ciudad buscada
     }
   }
-
+  ngOnInit(): void {
+  this.getForecast();
+  this
+  }
+  
+  shouldShowClouds(): boolean {
+    const cloudValue = this.forecastData?.current?.cloud; // Obtén el valor de cloud
+    return cloudValue >= 1 && cloudValue <= 99;
+  }
+  
   getForecast() {
     if (this.selectedCity) {
       this.weatherService.getForecastWeather(this.selectedCity, this.days)
         .subscribe(
           (forecast: any) => {
             this.forecastData = forecast;
-
+  
             // Guardar la última ciudad buscada en el almacenamiento local
             localStorage.setItem('lastCity', this.selectedCity);
           },
@@ -71,4 +80,5 @@ export class HomePage {
         );
     }
   }
+  
 }

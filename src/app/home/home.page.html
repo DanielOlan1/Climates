@@ -1,57 +1,99 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-     CLIMATEX
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-item>
+
+  <ion-card  button mode="ios" >
+    <ion-card-header class="card-header">
+        <span>{{ forecastData.location.name }}, {{ forecastData.location.region }}<br>{{ forecastData.location.country }}</span>
+       <span>{{ forecastData.location.localtime }}</span>
+    </ion-card-header>
+    <ion-card-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="12">
-          <p>{{ forecastData.current.temp_c }}°</p>
+      <ion-col size="12" class="temp">
+          <h1>{{ forecastData.current.temp_c }}°</h1>
 
       </ion-col>
       <ion-col size="12">
-          <p>Cloud: {{ forecastData.current.cloud }}</p>
+        
+      <div class="container">
+          <div class="cloud front" *ngIf="shouldShowClouds()">
+            <span class="left-front"></span>
+            <span class="right-front"></span>
+          </div>
+          <span class="sun sunshine"></span>
+          <span class="sun"></span>
+          <div class="cloud back" *ngIf="shouldShowClouds()">
+            <span class="left-back"></span>
+            <span class="right-back"></span>
+          </div> 
+        </div>
+
       </ion-col>
       <ion-col size="12">
-        <p>{{ forecastData.location.name }}, {{ forecastData.location.region }}, {{ forecastData.location.country }}</p>
+        <h1></h1>
       </ion-col>
       <ion-col size="12" >
-        <p>Local Time: {{ forecastData.location.localtime }}</p>
+        <h1></h1>
       </ion-col>
     </ion-row>
+    
   </ion-grid>
-</ion-item>
+    </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card mode="ios" button>
+    <ion-card-header class="card-header">
+      <span>Current Weather</span>
+      <span>Temperature</span>
+    </ion-card-header>
+    <ion-card-content>
+     <ion-grid>
+      <ion-row>
+        <ion-col size="6" >
+          <h1>{{ forecastData.current.temp_c }}°C / {{ forecastData.current.temp_f }}°F</h1>
+        </ion-col>
+        <ion-col size="6" >
+          <h1>Humidity: {{ forecastData.current.humidity }}%       
+            <svg xml:space="preserve" viewBox="0 0 30 30" height="30px" width="30px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" class="humiditysvg">  <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+              AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEUAAAAAAP9NerV/f39O
+              e7ZQfLZVf6pRfbfL5fdRfbZIbbZmmcxols5nl85OebSPsteLrdVSfLZxl89ok9FqlM5ahsBdicNa
+              hsFcicRhjcdWgbpahsFfi8ZbhsFijsmErOWLt+9xndZcicJahsFahsFdicN5n81xjcZqlNRpls1q
+              lNBfn99pls9nkcxXgrpZgrtik81OebWNsdeMrtZOebRNerVZg7pwmMhNebRKdLRNerZNebHZ8v9o
+              lM9jj8rV7v3W7v1ch7+Ktu6Lt/CEsep7p+Cz1PO+3fqJte5/q+V+quOUvvLY8f+TvfKpzvapzfaq
+              z/aRvPGdxfSVv/LX8P/W8P+32fnK5vyMuPCmzPXW8P6ny/WWv/KOufGawvO22PjJ5vzB4PrU7v6i
+              yPSz1fiYwfKOufDD4funzPXF4vvE4vuOuvHV7/7U7/7G4/uNufCx1Pew0/ev0veu0feQu/G01viP
+              ufF/q+SCrud+quSItO2kyvWjyfVijslrltFmkcyEqtZgjMf///8NXQssAAAAPHRSTlMAAZgCW+EG
+              y+jMBxRaRXHC2H8bX0ry/vrhyvnw0PDHR0Be/e/4/f4SDDNiEFVb0eI5iMHCho7NwI0YOBdy59Cm
+              AAAAAWJLR0SCi7P/RAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+cCEBITAJMBs+kAAAFb
+              SURBVCjPY2CAAUYmZgY8gIWVBY8sGzsHJxc2CW4eXiDJx28jIAjiCgnzgoV5ebiBpIiomK2duISk
+              lL2Ng6O0jIwsmCsnIW5nKyYqwiDv5AwELq5uNjY27h6enh5grpcLiHKSZ1BwBgNvH6C0j68zKlCA
+              SfvZgIA/LukAsHQAVDgwCE06OAQoGxoMlQ4Lj0CVdo6MsomKhrJjfGwi0aSdY+NiYcx4G5sEdGkk
+              kGhjk4RHOjnEJgWPtLNvKprL07CpgktHpEfgk/a3ycAnnWmThRDMxpDOscmFi6Xl5aNLF+QUwqWL
+              bIoxogQBSpJskkpwS5cC4yYFp3RZElA6qQwh7VFeAWZXVFYByWpwxNcAueUeQGlFJWUZCZXauloV
+              CRllVdt6NbB0QyOIq6TIoK4BSrWaWpogSltHVw8srW8A4mqoY6R6QyOgrLEJztxiamZuZsGGOztZ
+              WlnD2QBCYbJl9Cx9XAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMi0xNlQxODoxOTowMCswMDow
+              MG/wqfUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDItMTZUMTg6MTk6MDArMDA6MDAerRFJAAAA
+              KHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAyLTE2VDE4OjE5OjAwKzAwOjAwSbgwlgAAAABJRU5ErkJggg==" y="0" x="0" height="30" width="30" id="image0"></image>
+              </svg>
+          </h1>
+            </ion-col>
+      </ion-row>
+     </ion-grid> 
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card mode="ios">
      <ion-item>
     <ion-label>Select City:</ion-label>
-    <ion-select [(ngModel)]="selectedCity">
+    <ion-select [(ngModel)]="selectedCity" (ionChange)="getForecast()">
       <ion-select-option *ngFor="let city of cities" [value]="city">{{ city }}</ion-select-option>
     </ion-select>
+    
   </ion-item>
-
-  <ion-button expand="full" (click)="getForecast()">Get Forecast</ion-button>
   </ion-card>
  
 
   <div *ngIf="forecastData">
-    <ion-card>
-          <h2>Current Weather:</h2>
-    <p>Last Update: {{ forecastData.current.last_update }}</p>
-    <p>Temperature Celsius: {{ forecastData.current.temp_c }}</p>
-    <p>Temperature Fahrenheit: {{ forecastData.current.temp_f }}</p>
-    <p>Humidity: {{ forecastData.current.humidity }}</p>
-    </ion-card>
-
-
     <h2>Forecast:</h2>
     <ion-list>
       <ion-item *ngFor="let day of forecastData.forecast.forecastday">
