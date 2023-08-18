@@ -162,6 +162,56 @@
   color: rgba(87, 77, 51, 0.66);
 }
 
-// * {
-//  outline: 1px solid red;
-// } 
+ * {
+  outline: 1px solid red;
+ } 
+
+/* app.component.scss */
+
+.custom-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+}
+
+.day-container {
+  padding: 10px;
+}
+
+.day-card {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  ion-card-header {
+    text-align: center;
+    padding: 10px;
+    background-color: #2196f3;
+    color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  ion-card-content {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+}

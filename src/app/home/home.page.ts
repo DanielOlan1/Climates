@@ -81,4 +81,10 @@ export class HomePage implements OnInit{
     }
   }
   
+  formatDate(date: string): string {
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: 'numeric' };
+    return new Date(date).toLocaleDateString('en-US', options);
+  }
+  
+  
 }
