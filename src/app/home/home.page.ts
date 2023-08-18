@@ -44,7 +44,8 @@ export class HomePage {
     'Hualahuises',
     'Villaldama'
   ];
-  
+
+
   constructor(private weatherService: WeatherService) {
     // Obtener la última ciudad buscada del almacenamiento local
     const lastCity = localStorage.getItem('lastCity');

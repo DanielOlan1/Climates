@@ -8,7 +8,8 @@
 
 
 <ion-content [fullscreen]="true">
-<ion-item>
+  <ion-card>
+    <ion-item>
   <ion-grid>
     <ion-row>
       <ion-col size="12">
@@ -19,17 +20,15 @@
           <p>Cloud: {{ forecastData.current.cloud }}</p>
       </ion-col>
       <ion-col size="12">
-        <p>{{ forecastData.location.name }}</p>
+        <p>{{ forecastData.location.name }}, {{ forecastData.location.region }}, {{ forecastData.location.country }}</p>
       </ion-col>
       <ion-col size="12" >
-
+        <p>Local Time: {{ forecastData.location.localtime }}</p>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-item>
-
-
-
+  </ion-card>
 
   <ion-card>
      <ion-item>
@@ -44,16 +43,14 @@
  
 
   <div *ngIf="forecastData">
-    <h2>Location:</h2>
-    <p>Region: {{ forecastData.location.region }}</p>
-    <p>Country: {{ forecastData.location.country }}</p>
-    <p>Local Time: {{ forecastData.location.localtime }}</p>
-
-    <h2>Current Weather:</h2>
+    <ion-card>
+          <h2>Current Weather:</h2>
     <p>Last Update: {{ forecastData.current.last_update }}</p>
     <p>Temperature Celsius: {{ forecastData.current.temp_c }}</p>
     <p>Temperature Fahrenheit: {{ forecastData.current.temp_f }}</p>
     <p>Humidity: {{ forecastData.current.humidity }}</p>
+    </ion-card>
+
 
     <h2>Forecast:</h2>
     <ion-list>
